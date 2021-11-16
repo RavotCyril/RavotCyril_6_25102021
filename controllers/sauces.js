@@ -5,12 +5,14 @@ const fs = require('fs');
 exports.createModelsSauce = (req, res, next) => {
     // Appel du body de la sauce.
     let sauce = JSON.parse(req.body.sauce);
-    delete sauce._id;
+    // delete sauce._id;
     const modelsSauce = new ModelsSauce({
         ...sauce,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         likes: 0,
-        dislikes: 0
+        dislikes: 0,
+        usersLiked: [],
+        usersDisliked: []
     });
     modelsSauce.save()
         .then(() => res.status(201).json({ message: 'Sauce enregistrée !' }))
@@ -94,34 +96,47 @@ exports.getAllSauces = (req, res, next) => {
         }
     );
 };
+// Définit le statut "like" pour l'userId fourni. 
 
 exports.createLikeSauce = (req, res, next) => {
-    let sauce
-    JSON.parse(JSON.stringify(req.body.sauce));
-    sauce.likes = 0;
-    sauce.dislikes = 0;
-    sauce.usersLiked = 0;
-    sauce.usersDisliked = 0;
-    let likes = document.querySelector('likes');
+    if (req.body.userId)
+        ModelsSauce.findOne({ _id: req.params.id })
+        .then((sauce) => {
+            let likes = document.querySelector('likes');
+            let dislikes = document.querySelector('dislikes');
 
-    likes.addEventListener("click", function() {
-        sauce.likes += 1;
-        sauce.usersLiked += 1;
-    })
-    let dislikes = document.querySelector('dislikes');
-    dislikes.addEventListener("click", function() {
-        sauce.dislikes += 1;
-        sauce.usersDisliked += 1;
-    })
-    ModelsSauce.find().then(
-        (ModelsSauces) => {
-            res.status(200).json(ModelsSauces);
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
+            likes.addEventListener("click", function() {
+                // Si like = 1, L'utilisateur aime ( = like ) la sauce.
+                if (sauce.likes === 0) {
+                    sauce.usersLiked += 1;
+                }
+                // Si like = 0, L'utilisateur annule son like ou son dislike.
+                else if (sauce.likes === 1) {
+                    sauce.usersLiked -= 1;
+                    sauce.usersDisliked = 0;
+                }
+                // Si like = -1, l'utilisateur n'aime pas (=dislike) la sauce.
+                else if (sauce.likes === 0) {
+                    sauce.usersLiked -= 1;
+                    sauce.usersDisliked += 1;
+                }
+            })
+            dislikes.addEventListener("click", function() {
+
+                // Si like = 0, L'utilisateur annule son like ou son dislike.
+                if (sauce.likes === 1) {
+                    sauce.usersLiked -= 1;
+                    sauce.usersDisliked -= 1;
+                }
+                // Si like = -1, l'utilisateur n'aime pas (=dislike) la sauce.
+                else if (sauce.likes === 0) {
+                    sauce.usersLiked -= 1;
+                    sauce.usersDisliked += 1;
+                }
+            })
+            ModelsSauce.updateOne({ _id: req.params.id }, {...sauce, _id: req.params.id })
+                .then(() => res.status(200).json({ message: 'Sauce supprimée !' }))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(403).json({ error }));
 };
