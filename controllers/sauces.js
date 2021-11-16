@@ -27,23 +27,6 @@ exports.getOneModelsSauce = (req, res, next) => {
         })
         .then(
             (ModelsSauce) => {
-                // let sauce
-                // JSON.parse(JSON.stringify(req.body.sauce));
-                // sauce.likes = 0;
-                // sauce.dislikes = 0;
-                // sauce.usersLiked = 0;
-                // sauce.usersDisliked = 0;
-                // let likes = document.querySelector('likes');
-
-                // likes.addEventListener("click", function() {
-                //     sauce.likes += 1;
-                //     sauce.usersLiked += 1;
-                // })
-                // let dislikes = document.querySelector('dislikes');
-                // dislikes.addEventListener("click", function() {
-                //     sauce.dislikes += 1;
-                //     sauce.usersDisliked += 1;
-                // })
                 res.status(200).json(ModelsSauce);
             }
         ).catch(
@@ -60,8 +43,8 @@ exports.modifyModelsSauce = (req, res, next) => {
     if (req.file) {
         // Si l'image est modifiée L'ancienne image dans le  dossier/ Image doit être supprimé.
         ModelsSauce.findOne({ _id: req.params.id })
-            .then(ModelsSauce => {
-                const filename = ModelsSauce.imageUrl.split('/images/')[1];
+            .then(modelsSauce => {
+                const filename = modelsSauce.imageUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     // Une fois que l'ancienne image est supprimée dans le dossier image.On peut mettre à jour le reste des données de la sauce. 
                     const sauce = {
@@ -99,6 +82,37 @@ exports.deleteModelsSauce = (req, res, next) => {
 // Afficher toutes les sauces
 
 exports.getAllSauces = (req, res, next) => {
+    ModelsSauce.find().then(
+        (ModelsSauces) => {
+            res.status(200).json(ModelsSauces);
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+};
+
+exports.createLikeSauce = (req, res, next) => {
+    let sauce
+    JSON.parse(JSON.stringify(req.body.sauce));
+    sauce.likes = 0;
+    sauce.dislikes = 0;
+    sauce.usersLiked = 0;
+    sauce.usersDisliked = 0;
+    let likes = document.querySelector('likes');
+
+    likes.addEventListener("click", function() {
+        sauce.likes += 1;
+        sauce.usersLiked += 1;
+    })
+    let dislikes = document.querySelector('dislikes');
+    dislikes.addEventListener("click", function() {
+        sauce.dislikes += 1;
+        sauce.usersDisliked += 1;
+    })
     ModelsSauce.find().then(
         (ModelsSauces) => {
             res.status(200).json(ModelsSauces);
