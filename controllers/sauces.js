@@ -99,44 +99,40 @@ exports.getAllSauces = (req, res, next) => {
 // Définit le statut "like" pour l'userId fourni. 
 
 exports.createLikeSauce = (req, res, next) => {
-    if (req.body.userId)
-        ModelsSauce.findOne({ _id: req.params.id })
-        .then((sauce) => {
-            let likes = document.querySelector('likes');
-            let dislikes = document.querySelector('dislikes');
 
-            likes.addEventListener("click", function() {
-                // Si like = 1, L'utilisateur aime ( = like ) la sauce.
-                if (sauce.likes === 0) {
-                    sauce.usersLiked += 1;
-                }
-                // Si like = 0, L'utilisateur annule son like ou son dislike.
-                else if (sauce.likes === 1) {
-                    sauce.usersLiked -= 1;
-                    sauce.usersDisliked = 0;
-                }
-                // Si like = -1, l'utilisateur n'aime pas (=dislike) la sauce.
-                else if (sauce.likes === 0) {
-                    sauce.usersLiked -= 1;
-                    sauce.usersDisliked += 1;
-                }
-            })
-            dislikes.addEventListener("click", function() {
+    const userId = req.body.userId;
+    const like = req.body.like;
+    const sauce = req.params.id;
+    ModelsSauce.findOne({ _id: sauce })
+        .then(sauce => {
+            console.log(sauce)
+            switch (like) {
+                // Dislike : Si like = -1, l'utilisateur n'aime pas la sauce.
 
-                // Si like = 0, L'utilisateur annule son like ou son dislike.
-                if (sauce.likes === 1) {
-                    sauce.usersLiked -= 1;
-                    sauce.usersDisliked -= 1;
-                }
-                // Si like = -1, l'utilisateur n'aime pas (=dislike) la sauce.
-                else if (sauce.likes === 0) {
-                    sauce.usersLiked -= 1;
-                    sauce.usersDisliked += 1;
-                }
-            })
-            ModelsSauce.updateOne({ _id: req.params.id }, {...sauce, _id: req.params.id })
-                .then(() => res.status(200).json({ message: 'Sauce supprimée !' }))
-                .catch(error => res.status(400).json({ error }));
-        })
-        .catch(error => res.status(403).json({ error }));
+                case -1:
+                    console.log('Je n`aime pas');
+                    sauce.usersDisliked.push(userId);
+                    sauce.dislikes -= 1;
+                    break;
+                    // Je ne sais pas  : Si like = 0, L'utilisateur annule son like ou son dislike.
+
+                case 0:
+                    console.log('je sais pas');
+                    sauce.usersDisliked.splice(userId, 1)
+                    sauce.usersLiked.splice(userId, 1)
+                    break;
+
+                    // like : Si like = 1, L'utilisateur aime la sauce.
+
+                case 1:
+                    console.log('j`aime');
+                    sauce.usersLiked.push(userId);
+                    sauce.likes += 1;
+                    break;
+            };
+            sauce.save()
+                .then(() => res.status(200).json({ message: 'Sauce notée' }))
+                .catch(error => res.status(403).json({ error }))
+        });
+    console.log("alert3");
 };
