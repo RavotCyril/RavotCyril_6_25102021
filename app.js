@@ -1,6 +1,7 @@
+const session = require('express-session');
 const express = require('express');
 const mongoose = require('mongoose');
-const helmet = require("helmet");
+const helmet = require('helmet');
 
 const path = require('path');
 const userRoutes = require('./routes/user');
@@ -61,7 +62,16 @@ app.use(helmet.xssFilter());
 */
 app.use(helmet());
 
-// Routes Images-sauce - Authentication 
+// Express-session qui remplace le middleware express.session intégré à Express 3.x.
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: true }
+    }))
+    // Routes Images-sauce - Authentication 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);

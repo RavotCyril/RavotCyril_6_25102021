@@ -120,6 +120,7 @@ exports.createLikeSauce = (req, res, next) => {
                     console.log('je sais pas');
                     sauce.usersDisliked.splice(userId, 1)
                     sauce.usersLiked.splice(userId, 1)
+
                     break;
 
                     // like : Si like = 1, L'utilisateur aime la sauce.
