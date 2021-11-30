@@ -1,7 +1,11 @@
+/* Package de chiffrement */
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); /* Jeton Token */
-
+/* Package pour créer et vérifier les tokens d'anthentification */
+const jwt = require('jsonwebtoken');
+/* Model schéma User */
 const User = require('../models/User');
+
+/* Exporte la fonction  Inscription utilisateur  */
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10) /* Le sel à utiliser dans le cryptage. S'il est spécifié sous forme de nombre, un sel sera généré avec le nombre de tours spécifié et utilisé. */
@@ -16,6 +20,7 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+/* Exporte la fonction connexion utilisateur */
 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })

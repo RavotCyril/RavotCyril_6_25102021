@@ -143,5 +143,5 @@ exports.createLikeSauce = (req, res, next) => {
                 })
                 .catch(error => res.status(403).json({ error }))
         });
-    console.log("Fin de la sauce notée");
+    // console.log("Fin de la sauce notée");
 };
