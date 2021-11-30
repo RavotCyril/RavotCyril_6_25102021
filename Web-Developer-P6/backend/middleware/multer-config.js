@@ -1,3 +1,8 @@
+/* Gestions des fichiers envoyés à L'API */
+
+/* Importation du package multer.
+Multer est un middleware node.js pour la gestion des données multipart/form-data,
+qui est principalement utilisé pour le téléchargement de fichiers.*/
 const multer = require('multer');
 
 const MIME_TYPES = {
@@ -5,7 +10,7 @@ const MIME_TYPES = {
     'image/jpeg': 'jpg',
     'image/png': 'png'
 };
-
+/* Créer un object de configuration pour multer  */
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images');
@@ -16,5 +21,5 @@ const storage = multer.diskStorage({
         callback(null, name + Date.now() + '.' + extension);
     }
 });
-
+/* Exporte le middleware multer */
 module.exports = multer({ storage: storage }).single('image');
