@@ -13,4 +13,7 @@ const ModelsSauceSchema = mongoose.Schema({
     usersLiked: { type: Array, required: true },
     usersDisliked: { type: Array, required: true },
 });
+
+// Exporter le schéma 
+
 module.exports = mongoose.model('ModelsSauce', ModelsSauceSchema);
