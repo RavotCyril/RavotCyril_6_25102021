@@ -1,40 +1,36 @@
-HOT TAKES  ( Sauces piquantes )
+HOT TAKES
+Installation
 
-Pour Visualiser l'application. Vous aurez besoin de Node (Node.js est une plateforme logicielle libre en JavaScript,) et d'installer npm sur votre machine.
+Here are the dependancies you need to install:
 
-Intallation
+    NodeJS 12.14 or 14.0.
+    Angular CLI 7.0.2.
+    node-sass : make sure to use the corresponding version to NodeJS. For Noe 14.0 for instance, you need node-sass in version 4.14+.
 
-Clonez le repositery : https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6
+On Windows, these installations require to use PowerShell in administrator mode.
 
-Positionnez-vous dans le dossier du projet puis suivez la procédure suivante via votre terminal :
+Then, clone this repo, run npm install, and run npm install --save-dev run-script-os.
+Usage
 
-Backend :
+Run npm start. This should both run the local server and launch your browser.
 
-1- Depuis le dossier du projet : cd backend
-2- npm install
-3- nodemon server
+If your browser fails to launch, or shows a 404 error, navigate your browser to http://localhost:8080.
 
+The app should reload automatically when you make a change to a file.
 
-Frontend :
-
-1- Depuis le dossier du projet : cd frontend
-2- run npm install et run npm install --save-dev run-script-os. 
-3- 'npm start'
-Cela devrait à la fois exécuter le serveur local et lancer votre navigateur.
-
-Si votre navigateur ne démarre pas ou affiche une erreur 404, accédez à http://localhost:8080 dans votre navigateur.
-Utiliser Ctrl+C dans le terminal pour arrêter le serveur local. 
+Use Ctrl+C in the terminal to stop the local server.c
 
 
-Pour pouvoir vérifier les versions.
 
-1- Depuis le dossier du projet : cd Web-Developer-P6
-2-  ng version
+Repository GitHub
 
-Resultat : 
-
-Angular CLI: 13.0.3
-Node: 14.18.1
-Package Manager: npm 8.1.2
-OS: win32 x64
-
+Retirez le code de l'application front-end du repository du projet et suivez les
+étapes suivantes :
+1. Clonez le repository
+2. Ouvrez un terminal (Linux/Mac) ou une invite de commande/PowerShell
+(Windows)
+3. Exécutez npm install à partir du répertoire du projet
+4. Exécutez npm start sur le Front-end 
+5. Exécutez le back-end sur http://localhost:3000 seulement avec nodemon server.
+Si vous utilisez VSCode, utilisez l'extension LiveShare pour faire fonctionner le
+serveur front-end sans avoir recours à npm install.
