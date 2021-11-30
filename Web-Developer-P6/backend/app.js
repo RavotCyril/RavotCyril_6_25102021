@@ -1,8 +1,14 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const helmet = require('helmet');
+/* Application */
 
+/* Framework node.js */
+const express = require('express');
+/* Rend les interactions fluides entre MongoDB et Node.Js */
+const mongoose = require('mongoose');
+/* Définit des en têtes http supplémentaires securisés  */
+const helmet = require('helmet');
+/* Donne accès au chemin de nos fichiers. */
 const path = require('path');
+/* Importe les routes User et Sauces */
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauces');
 
@@ -63,7 +69,10 @@ app.use(helmet());
 
 // Routes Images-sauce - Authentication 
 
+/* Gestion des fichiers images */
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
+/* Enregistre les routes sauces et auth de l'application */
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
 
