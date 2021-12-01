@@ -127,7 +127,6 @@ exports.createLikeSauce = (req, res, next) => {
                         sauce.dislikes -= 1;
                     }
                     break;
-
                     // like : Si like = 1, L'utilisateur aime la sauce.
 
                 case 1:
