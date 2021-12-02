@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 /* Model schéma User */
 const User = require('../models/User');
+const dotenv = require('dotenv')
+dotenv.config();
 
 /* Exporte la fonction  Inscription utilisateur  */
 
@@ -37,7 +39,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         /*  Id généré par MongoDB */
                         token: jwt.sign({ userId: user._id }, /* Token d'authentification */
-                            'RANDOM_TOKEN_SECRET', { expiresIn: '24h' } /* Temps de validité du Token */
+                            process.env.DB_TOKEN, { expiresIn: '24h' } /* Temps de validité du Token */
                         )
                     });
                 })

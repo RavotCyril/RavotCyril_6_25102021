@@ -4,7 +4,12 @@
 const express = require('express');
 /* Rend les interactions fluides entre MongoDB et Node.Js */
 const mongoose = require('mongoose');
-/* Définit des en têtes http supplémentaires securisés  */
+/* Dotenv est un module sans dépendance qui charge les variables d'environnement 
+d'un fichier .env dans process.env.
+Le stockage de la configuration dans l'environnement séparé du code est basé sur
+la méthodologie de l'application Twelve-Factor. */
+require('dotenv').config()
+    /* Définit des en têtes http supplémentaires securisés  */
 const helmet = require('helmet');
 /* Donne accès au chemin de nos fichiers. */
 const path = require('path');
@@ -14,7 +19,7 @@ const saucesRoutes = require('./routes/sauces');
 
 // Connexion à la base de données MongoDb
 
-mongoose.connect('mongodb+srv://cyriloo69:lollol69@cluster0.lwef4.mongodb.net/P6-Piquante?retryWrites=true&w=majority', {
+mongoose.connect("mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_NAME + ".lwef4.mongodb.net/P6-Piquante?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
