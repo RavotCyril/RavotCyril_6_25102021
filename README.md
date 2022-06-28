@@ -1,5 +1,15 @@
 HOT TAKES  ( Sauces piquantes )
 
+Construire une API sécurisée pour une application d'avis gastronomiques
+
+Compétences : 
+
+- Implémenter un modèle logique de données conformément à la réglementation
+
+- Stocker des données de manière sécurisée
+
+- Mettre en œuvre des opérations CRUD de manière sécurisée
+
 Pour Visualiser l'application. Vous aurez besoin de Node (Node.js est une plateforme logicielle libre en JavaScript,) et d'installer npm sur votre machine.
 
 Intallation
