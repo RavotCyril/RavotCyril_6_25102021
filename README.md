@@ -12,9 +12,11 @@ Compétences :
 
 Pour Visualiser l'application. Vous aurez besoin de Node (Node.js est une plateforme logicielle libre en JavaScript,) et d'installer npm sur votre machine.
 
+
+
 Intallation
 
-Clonez le repositery : https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6
+Clonez le repository : https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6
 
 Positionnez-vous dans le dossier du projet puis suivez la procédure suivante via votre terminal :
 
