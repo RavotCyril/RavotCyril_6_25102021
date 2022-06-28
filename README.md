@@ -54,7 +54,10 @@ Pour pouvoir vérifier les versions.
 Resultat : 
 
 Angular CLI: 13.0.3
+
 Node: 14.18.1
+
 Package Manager: npm 8.1.2
+
 OS: win32 x64
 
