@@ -25,6 +25,8 @@ Frontend :
 
 3- 'npm start'
 
+--------------------------------------------------------------------------------------------------------------------
+
 Cela devrait à la fois exécuter le serveur local et lancer votre navigateur.
 
 Si votre navigateur ne démarre pas ou affiche une erreur 404, accédez à http://localhost:8081 dans votre navigateur.
