@@ -1,4 +1,5 @@
 HOT TAKES  ( Sauces piquantes )
+=======
 
 Construire une API sécurisée pour une application d'avis gastronomiques
 
@@ -21,6 +22,7 @@ Clonez le repository : https://github.com/OpenClassrooms-Student-Center/Web-Deve
 Positionnez-vous dans le dossier du projet puis suivez la procédure suivante via votre terminal :
 
 Backend :
+=======
 
 1- Depuis le dossier du projet : cd backend
 
@@ -30,6 +32,7 @@ Backend :
 
 
 Frontend :
+=======
 
 1- Depuis le dossier du projet : cd frontend
 
